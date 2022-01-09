@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Image Classification</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 10vh;background: transparent;background: #e6e6fa !important;">
+      <a class="navbar-brand" href="#" style="font-weight: bold;font-size: 35px !important;padding: 0px 70px !important;">Image Classification</a>
+      <div class="collapse navbar-collapse " id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" style="font-weight: 25px;font-size: 25px !important;padding: 0px 20px !important;">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+  </nav>
+
+  <div class="main-div" style="background: #e6e6fa;">
+    <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <form class="form-horizontal" action="/submit" method="post" enctype="multipart/form-data">
+          <div class="form-group first">
+            <label class="control-label" for="pwd" style="padding-top: 60px; font-weight: bold;">Upload Image :</label>
+            <div>          
+              <input type="file" class="form-control" placeholder="Image"  name="my_image" id="pwd" style="width: 75%;background: #e6e6fa;">
+            </div>
+            <div class="submit" style="padding: 20px;">
+              <button type="submit" class="btn btn-success">Predict</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-6">
+        <form class="form-horizontal" action="/click_image" method="post" enctype="multipart/form-data">
+          <div class="form-group first">
+            <label class="control-label " for="pwd" style="padding-top: 60px; font-weight: bold;">Click Image :</label>
+            <p> Wait for 2 seconds it will automatically click the image and predict. </p>
+            <div class="submit" style="padding: 20px;">
+              <button type="submit" class="btn btn-success">Click and Predict</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        {% if prediction %}
+          <img src="{{img_path}}" height="400px" width="400px">
+          <h2> Your Prediction   : <i> {{prediction}} </i></h2>
+        {% endif %}
+      </div>
+
+      <div class="col-6">
+        <h1> About </h1>
+        <p>
+
+        This is a website made to predict the classes of the imagenet dataset. The model used in background is Resnet-18 where resnet stands for residual network. Specifically, In this website we used torchvision pretrained resnet-18 model which is earlier trained on imagenet dataset. We used some sort of transfer learning in order to do the desired task. Resnet-18 is a model made on architecture which is decided by many experiments. It contains many layers like Convolutional layer, Flatten Layer, Average Pool layer, Dense Layer and many more. We can furthur modify this model using our dataset and after changing some Layers.<br> <br>
+
+        In this website you can predict the output of the output classes of imagenet by two ways: <br>
+        1. By directly uploading the image by upload button present there on top left side of the page. In this you have to simply select the image from your local drive and then submit the predict button it will give the output which have highest probabilty of matching which the outputted class. <br>
+        2. Second one is by clicking the image directly from your camera and then predict the image. The above button click and predict after clicking this button it will automatically click the image and then predict the output related with this image.
+        
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer" style="text-align: center; padding: 10px;">
+    Copyright ©2k22 ASHUTOSH SONI...All rights reserved.... 
+  </div>
+</body>
+</html>
